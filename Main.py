@@ -13,7 +13,6 @@ class Main(QWidget):
         self.setWindowTitle('Proposal Creator')
         self.setGeometry(int(1680/2 - w/2), int(1050/2 - h/2), w, h)
         self.resize(w, h)
-        #self.setStyleSheet('background-color: rgb(255, 255, 255)')
 
         layout = QVBoxLayout()
         formsLayout = QHBoxLayout()

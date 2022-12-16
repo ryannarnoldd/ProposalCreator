@@ -15,8 +15,6 @@ font=("calibre",10, "bold")
 def submit():
     name = name_var.get()
     phone = phone_var.get()
-     
-    print(f"{name} {phone}")
 
 def clear():
     name_var.set("")

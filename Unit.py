@@ -26,4 +26,3 @@ class Unit(QWidget):
 
     def delUnit(self):
         sip.delete(self)
-

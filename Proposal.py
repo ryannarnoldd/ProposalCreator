@@ -10,8 +10,6 @@ def createProposal(d):
     f = open('data.json',)
     data = json.load(f)
 
-    #os.system('clear')
-
     today = date.today().strftime("%m-%d-%y")
     name = d['name']
     street = d['street']

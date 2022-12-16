@@ -65,7 +65,6 @@ def createProposal(d):
 
     homeOwnerString = '%s\n%s\n%s NY, %s\n%s\n%s' % (homeOwnerName, homeOwnerStreet, homeOwnerTown, homeOwnerTown, homeOwnerPhone, homeOwnerEmail)
 
-
     document = Document()
 
     section = document.sections[0]
@@ -76,11 +75,6 @@ def createProposal(d):
 
     document.styles['Normal'].font.name = "Times New Roman"
     document.styles['Normal'].font.size = Pt(12)
-
-
-
-
-
 
 
     document.add_picture('rycor.png')
