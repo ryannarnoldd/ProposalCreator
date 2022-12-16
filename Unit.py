@@ -1,5 +1,4 @@
-import sys
-from PyQt5.QtWidgets import (QApplication, QComboBox, QFormLayout, QHBoxLayout, QVBoxLayout, QScrollArea, QWidget, QPushButton, QRadioButton, QLabel, QLineEdit, QGridLayout, QMessageBox)
+from PyQt5.QtWidgets import (QComboBox, QHBoxLayout, QWidget, QPushButton, QLabel, QLineEdit)
 from PyQt5 import sip
 
 class Unit(QWidget):

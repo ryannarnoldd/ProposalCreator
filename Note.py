@@ -1,7 +1,5 @@
-import sys
-from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QFormLayout, QHBoxLayout, QVBoxLayout, QScrollArea, QWidget, QPushButton, QRadioButton, QLabel, QLineEdit, QGridLayout, QMessageBox)
+from PyQt5.QtWidgets import (QHBoxLayout, QWidget, QPushButton, QLabel, QLineEdit)
 from PyQt5 import sip
-from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Note(QWidget):
     def __init__(self):

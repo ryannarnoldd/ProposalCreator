@@ -3,8 +3,7 @@ import Unit
 import Discount
 import Note
 import sys
-from PyQt5.QtWidgets import * #(QApplication, QButtonGroup, QComboBox, QFormLayout, QHBoxLayout, QVBoxLayout, QScrollArea, QWidget, QSpinBox, QPushButton, QRadioButton, QLabel, QLineEdit, QGridLayout, QMessageBox)
-from PyQt5.Qt import *
+from PyQt5.QtWidgets import *
 
 class Main(QWidget):
     def __init__(self):
@@ -12,7 +11,7 @@ class Main(QWidget):
         w = 1680
         h = 300
         self.setWindowTitle('Proposal Creator')
-        self.setGeometry((1680/2 - w/2), (1050/2 - h/2), w, h)
+        self.setGeometry(int(1680/2 - w/2), int(1050/2 - h/2), w, h)
         self.resize(w, h)
         #self.setStyleSheet('background-color: rgb(255, 255, 255)')
 
@@ -34,7 +33,6 @@ class Main(QWidget):
         self.notesFormLayout = QVBoxLayout()
 
         extraLayout = QGridLayout()
-
 
         label_name = QLabel('<font size="4">Name:</font>')
         self.lineEdit_name = QLineEdit()

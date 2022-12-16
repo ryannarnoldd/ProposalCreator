@@ -6,8 +6,6 @@ from docx.shared import Pt
 import json
 from docx.shared import RGBColor
 import os
-import operator
-
 def createProposal(d):
     f = open('data.json',)
     data = json.load(f)
