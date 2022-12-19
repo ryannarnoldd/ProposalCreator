@@ -1,5 +1,6 @@
-from PyQt5.QtWidgets import (QComboBox, QHBoxLayout, QWidget, QPushButton, QLabel, QLineEdit)
 from PyQt5 import sip
+from PyQt5.QtWidgets import (QComboBox, QHBoxLayout, QLabel, QLineEdit, QPushButton, QWidget)
+
 
 # Unit class.
 class Unit(QWidget):

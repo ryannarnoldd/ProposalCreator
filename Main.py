@@ -1,9 +1,6 @@
-import Proposal
-import Unit
-import Discount
-import Note
 import sys
 from PyQt5.QtWidgets import *
+import Discount, Note, Proposal, Unit
 
 class Main(QWidget):
     def __init__(self):

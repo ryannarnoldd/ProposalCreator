@@ -1,5 +1,6 @@
-from PyQt5.QtWidgets import (QHBoxLayout, QWidget, QPushButton, QLabel, QLineEdit)
 from PyQt5 import sip
+from PyQt5.QtWidgets import (QHBoxLayout, QLabel, QLineEdit, QPushButton, QWidget)
+
 
 class Note(QWidget):
     def __init__(self):

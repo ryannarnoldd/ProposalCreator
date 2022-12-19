@@ -1,7 +1,6 @@
-import sys
-from PyQt5.QtWidgets import (QCheckBox, QHBoxLayout, QWidget, QPushButton, QLabel, QLineEdit)
-from PyQt5 import sip
-from PyQt5 import QtGui
+from PyQt5 import QtGui, sip
+from PyQt5.QtWidgets import (QCheckBox, QHBoxLayout, QLabel, QLineEdit, QPushButton, QWidget)
+
 
 class Discount(QWidget):
     def __init__(self):

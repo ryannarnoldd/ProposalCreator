@@ -1,15 +1,15 @@
-from docx import Document
-from docx.shared import Inches
-from datetime import date
-from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.shared import Pt
 import json
-from docx.shared import RGBColor
+from datetime import date
+from docx import Document
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.shared import Inches, Pt, RGBColor
 
+# Function to create the proposal using the JSON data and data from the user.
 def createProposal(d):
     f = open('data.json',)
     data = json.load(f)
 
+    # Getting the data from the dictionary.
     today = date.today().strftime("%m-%d-%y")
     name = d['name']
     street = d['street']
@@ -26,16 +26,17 @@ def createProposal(d):
     discounts = d['discounts']
     notes = d['notes']
 
-    # CALCULATING BTU and PRICE
+    # Calculating BTU and total price based on the units.
     totalPrice = 0
     totalBTU = 0
     for loc in units:
         totalPrice = totalPrice + data["Price"][units[loc]]
         totalBTU = totalBTU + data["BTU"][units[loc]]
 
+    # Sorting the units by location.
     units = {k: v for k, v in sorted(units.items(), key=lambda x: int(x[1]), reverse=True)}
 
-    # CALCULATING DISCOUNTS
+    # Calculaiting the total discount.
     totalDiscount = 0
     for discount in discounts:
         if discount['perUnit']:
@@ -58,12 +59,12 @@ def createProposal(d):
     document.styles['Normal'].font.name = "Times New Roman"
     document.styles['Normal'].font.size = Pt(12)
 
-    # HEADERS
+    # Headers.
     document.add_picture('rycor.png')
     document.add_paragraph(rycorString).paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
     document.add_paragraph(homeOwnerString)
 
-    # NOTES
+    # Notes.
     noteParagraph = document.add_paragraph()
     noteParagraph.add_run('Client will sign Trade Ally Payment Authorization Form and utility company rebate will go directly to Rycor.').font.color.rgb = RGBColor(0xFF, 0x00, 0x00)
     for note in notes: 
@@ -71,7 +72,7 @@ def createProposal(d):
     noteParagraph.add_run('Full Heat Solution.\n\nALL FS Models.\n\n').font.color.rgb = RGBColor(0xFF, 0x00, 0x00)
     noteParagraph.add_run('Mitsubishi Super High Efficiency Heating, Cooling, Dehumidification, and Air Purification system.')
 
-    # UNITS
+    # Units.
     for loc, val in units.items():
         unitParagraph = document.add_paragraph('Install Mitsubishi ')
         unitParagraph.add_run("Hyper-Heat").font.color.rgb = RGBColor(0xFF, 0x00, 0x00)
@@ -85,12 +86,12 @@ def createProposal(d):
         unitPrice = data["Price"][str(val)]
         unitParagraph.add_run(f'\nTotal price to complete above mentioned work: ${unitPrice:,}')
 
-    # KUMO CLOUD
+    # Kumo Cloud(s).
     if kumoCloud:
         document.add_paragraph(f'${kumoCloud*295} Kumo Cloud - $295 for each Kumo Cloud device.')
         totalPrice += kumoCloud * 295
 
-    # HEAT SOLUTION
+    # Heat Solution.
     document.add_paragraph(f'Total price cost: ${totalPrice:,}')
     if fullSolution:
         rebatePrice = int((totalBTU * 0.13)-500)
@@ -100,7 +101,7 @@ def createProposal(d):
         rebateString = f'${rebatePrice:,} Rebate - Central Hudson Rebate Mail-In Rebate. $400 off per condenser for Partial heating load installation. Client will sign Trade Ally Payment Authorization form and utility company rebate will go directly to Rycor'
     rebateAndPriceParagraph = document.add_paragraph(rebateString)
 
-    # DISCOUNTS
+    # Discounts.
     discountString = ''
     for discount in discounts:
         amount = int(discount['amount'])
@@ -114,12 +115,12 @@ def createProposal(d):
     rebateAndPriceParagraph.add_run(f'\n\nTotal due on day of installation: ${(totalPrice - rebatePrice - totalDiscount):,}').font.color.rgb = RGBColor(0xFF, 0x00, 0x00)
     rebateAndPriceParagraph.add_run(f'\n\nTotal Project Cost after rebates and discounts:\n${(totalPrice - rebatePrice - totalDiscount):,} Due on day of Installation via certified bank check').font.color.rgb = RGBColor(0xFF, 0x00, 0x00)
 
-    # PRICE and INFORMATION
+    # Price and Information.
     finalInformationParagraph = document.add_paragraph('12-year parts and compressor warrantee\n3-year labor warrantee')
     finalInformationParagraph.add_run("\n\nPermit's").bold = True
     finalInformationParagraph.add_run(' - Permit and electrical inspection fees are not included and may vary by building department. RYCOR will provide all neccesary documents. Land owner will be responsible for bringing them to the building department.')
 
-    # ELECTRIC
+    # Electric.
     if electric != "Rycor HVAC":
         finalInformationParagraph.add_run("\n\nNote:").bold = True
         electricName = data['Electric'][electric]["Name"]
@@ -130,15 +131,15 @@ def createProposal(d):
 
     document.add_paragraph('Thank you for taking the time to meet with me. It would be a pleasure to complete this project with you. Please feel free to call me at any time with any thoughts or questions.')
 
-    # SINCERELY
+    # Sincerely.
     t = '\t' * 6
     sincerelyString = t + 'Sincerely,\n' +t+ f'{author}\n' +t+ 'Comfort Specialist\n' +t+ '(845) 742-5110'
     sincerelyParagraph = document.add_paragraph(sincerelyString)
     sincerelyParagraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
-    # SAVE and NAME FILE
+    # Saving and naming the file.
     unitList = ""
     for key, val in units.items():
         unitList += str(val) + " "
-    filePath = f'/Users/ryanarnold/Desktop/Personal/Computer Science/Proposal/Proposals/{name} {street} {unitList}Proposal.docx'
+    filePath = f'Proposals/{name} {street} {unitList}Proposal.docx'
     document.save(filePath)
