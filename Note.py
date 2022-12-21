@@ -15,9 +15,9 @@ class Note(QWidget):
         self.button_delNote = QPushButton('X')
         self.button_delNote.clicked.connect(self.delNote)
 
-        self.noteLayout.addWidget(label_note)
-        self.noteLayout.addWidget(self.lineEdit_note)
-        self.noteLayout.addWidget(self.button_delNote)
+        # Add the widgets to the layout.
+        widgets = [label_note, self.lineEdit_note, self.button_delNote]
+        [self.noteLayout.addWidget(widget) for widget in widgets]
 
         self.setLayout(self.noteLayout)
 

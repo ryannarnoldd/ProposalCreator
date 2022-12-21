@@ -22,10 +22,9 @@ class Unit(QWidget):
         self.button_delUnit = QPushButton('X')
         self.button_delUnit.clicked.connect(self.delUnit)
 
-        self.unitLayout.addWidget(label_unit)
-        self.unitLayout.addWidget(self.comboBox_value)
-        self.unitLayout.addWidget(self.lineEdit_location)
-        self.unitLayout.addWidget(self.button_delUnit)
+        # Add the widgets to the layout.
+        widgets = [label_unit, self.comboBox_value, self.lineEdit_location, self.button_delUnit]
+        [self.unitLayout.addWidget(widget) for widget in widgets]
 
         self.setLayout(self.unitLayout)
 
